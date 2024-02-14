@@ -12,7 +12,7 @@ const getAllArticles = (req, res) => {
         console.log(articles)
         return res.status(200).json({ articles });
     })
-    .catch (error => {
+    .catch(error => {
         return res.status(500).send(error.message);
     })
 };
