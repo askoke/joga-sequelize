@@ -7,7 +7,7 @@ const models = require('../models');
 
 // get all data from table
 const getAllArticles = (req, res) => {
-    models.Article.findAll()
+    models.Articles.findAll()
     .then(articles => {
         console.log(articles)
         return res.status(200).json({ articles });
@@ -19,13 +19,21 @@ const getAllArticles = (req, res) => {
 
 // show article by this slug
 const getArticleBySlug = (req, res) => {
-    models.Article.findOne({
+    models.Articles.findOne({
         where: {
             slug: req.params.slug
         },
-        include: [{
+        include: [
+            {
             model: models.Authors
-        }],
+            },
+            {
+                model: models.Tags,
+                through: {
+                    model: models.ArticleTags
+                }
+            }
+        ],
     })
     .then(article => {
         console.log(article)
