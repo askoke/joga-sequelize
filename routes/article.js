@@ -7,5 +7,6 @@ router.get('/', articleController.getAllArticles);
 router.get('/article/:slug', articleController.getArticleBySlug);
 
 router.post('/create', articleAdminController.createArticle);
+router.post('/edit/:id', articleAdminController.updateArticle);
 
 module.exports = router;

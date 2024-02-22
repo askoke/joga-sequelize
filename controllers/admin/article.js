@@ -34,7 +34,22 @@ const createArticle = (req, res) => {
     })
 }
 
+const updateArticle = (req, res) => {
+    // update article by Article model
+    const updatedArticle = models.Articles.update(req.body, {
+      where: { id: req.params.id }}
+    )
+    .then(article => {
+        console.log(article)
+        return res.status(200).json({ message: 'Article updated' });
+    })
+    .catch (error => {
+        return res.status(500).send(error.message);
+    })
+} 
+
 // exports controller functions
 module.exports = {
-    createArticle
+    createArticle,
+    updateArticle
 };
