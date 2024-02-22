@@ -48,8 +48,23 @@ const updateArticle = (req, res) => {
     })
 } 
 
+const deleteArticle = (req, res) => {
+    // delete article by Article model
+    const deletedArticle = models.Articles.destroy({
+        where: { id: req.params.id }} 
+    )
+    .then(article => {
+        console.log(article)
+        return res.status(200).json({ message: 'Article updated' });
+    })
+    .catch (error => {
+        return res.status(500).send(error.message);
+    })
+} 
+
 // exports controller functions
 module.exports = {
     createArticle,
-    updateArticle
+    updateArticle,
+    deleteArticle
 };
